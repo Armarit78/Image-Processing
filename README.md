@@ -2,6 +2,8 @@
 
 Ce projet applique diverses techniques d'optimisation avancées telles que les méthodes d'Euler-Lagrange, du Gradient Conjugué, et de DFP pour la manipulation d'images, le débruitage et la retouche d'images. Ces méthodes permettent d'améliorer la qualité des images en réduisant le bruit et en reconstruisant les parties manquantes.
 
+*Note : Pour plus d'informations détaillées sur les techniques et les résultats de ce projet, veuillez consulter le rapport associé.*
+
 ## Table des matières
 - [Introduction](#introduction)
 - [Techniques d'Optimisation](#techniques-doptimisation)
