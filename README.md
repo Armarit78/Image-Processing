@@ -52,44 +52,11 @@ Le principal défi dans le débruitage d'images est de retirer le bruit tout en 
 
 La régularisation de Tikhonov, également connue sous le nom de régression de crête dans certains contextes, vise à minimiser la différence entre l'image bruitée et la version débruitée tout en imposant une contrainte de lissage. Cela est obtenu en pénalisant les grands gradients (différences entre les valeurs de pixels adjacents) afin de réduire le bruit.
 
-Mathématiquement, la fonction objectif est formulée comme suit :
-
-\[
-J(u) = \frac{1}{2} \| v - u \|^2 + \frac{\lambda}{2} \| \nabla u \|^2
-\]
-
-où :
-- \( u \) est l'image débruitée,
-- \( v \) est l'image bruitée,
-- \( \nabla u \) est le gradient (représentant les changements d'intensité des pixels),
-- \( \lambda \) est le paramètre de régularisation qui contrôle le compromis entre la fidélité à l'image bruitée et le lissage.
-
 ### 2. Modèle Rudin-Osher-Fatemi (ROF)
 
 Le modèle ROF est basé sur la minimisation de la variation totale, qui est efficace pour préserver les contours nets tout en supprimant le bruit. Contrairement à la régularisation de Tikhonov, qui tend à flouter les contours, le modèle ROF conserve la structure de l'image, ce qui le rend idéal pour les images avec des détails ou des contours significatifs.
-
-Le modèle ROF est exprimé comme suit :
-
-\[
-J(u) = \frac{1}{2} \| v - u \|^2 + \lambda \text{TV}(u)
-\]
-
-où \( \text{TV}(u) \) représente la variation totale de l'image, qui mesure la somme des valeurs absolues des gradients de l'image. Le paramètre de régularisation \( \lambda \) contrôle le degré de lissage appliqué à l'image.
-
-L'indifférentiabilité du terme de variation totale nécessite des techniques d'optimisation avancées telles que BFGS pour résoudre efficacement le modèle ROF.
 
 ## Inpainting
 
 La retouche consiste à restaurer les parties manquantes ou corrompues d'une image. Cela est réalisé en remplissant les lacunes avec des valeurs qui sont cohérentes avec les zones environnantes. Nous avons utilisé des techniques d'optimisation similaires à celles employées dans le débruitage, mais avec des contraintes supplémentaires pour garantir que les régions retouchées se fondent parfaitement avec le reste de l'image.
 
-Le problème de la retouche peut être formulé comme suit :
-
-\[
-J(u) = \frac{1}{2} \| R(u) - v \|^2 + \lambda \sum \phi_{\alpha}(\nabla u)
-\]
-
-où :
-- \( R(u) \) est l'image masquée (les régions nécessitant une restauration sont mises à zéro),
-- \( \phi_{\alpha} \) est une approximation lisse de la fonction de valeur absolue pour rendre le problème différentiable.
-
-La solution est obtenue en mettant à jour de manière itérative les régions manquantes en utilisant des méthodes d'optimisation telles que BFGS et le gradient conjugué.
